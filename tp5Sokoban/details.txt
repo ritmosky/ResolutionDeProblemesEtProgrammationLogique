@@ -1,0 +1,87 @@
+—————————
+
+
+Action : 
+
+pousser_gauche
+pousser_droite
+pousser_haut
+pousser_bas
+
+
+—————————
+
+
+Fluents : position homme et position des caisses
+
+Homme(x, y)		== 	l’homme est sur la case (x, y)
+Caisse(x, y)		== 	la caisse est en (x, y)
+
+
+—————————
+
+
+Predicat :
+
+mur(x , y) 			==	un mûr en position (x, y)
+cible(x, y)			== 	une cible en position (x, y)
+voisin_haut(x, x’) 	== 	x a pour voisin haut x’
+voisin_bas(x, x’) 	== 	x a pour voisin bas x’
+voisin_gauche(x, x’)	== 	x a pour voisin gauche x’
+voisin_droite(x, x’)	==	x a pour voisin droit x’
+
+
+—————————
+
+
+Action(MoveRight(x, y),
+PRECOND: Homme(x, y) ^ Voisin_droite(y, y’) ^ ¬Caisse(x, y’)  ^ ¬Mur(x, y’) 
+EFFECT : Homme(x, y’) ^ ¬Homme(x, y) )
+
+
+Action(MoveLeft(x, y),
+PRECOND: Homme(x, y) ^ Voisin_gauche(y, y’) ^ ¬Caisse(x, y’) ^ ¬Mur(x, y’) 
+EFFECT : Homme(x, y’) ^ ¬Homme(x, y) )
+
+
+Action(MoveUp(x, y),
+PRECOND: Homme(x, y) ^ Voisin_haut(y, y’) ^ ¬Caisse(x, y’) ^ ¬Mur(x, y’) 
+EFFECT : Homme(x, y’) ^ ¬Homme(x, y) )
+
+
+Action(MoveDown(x, y),
+PRECOND: Homme(x, y) ^ Voisin_bas(y, y’) ^ ¬Caisse(x, y’) ^ ¬Mur(x, y’) 
+EFFECT : Homme(x, y’) ^ ¬Homme(x, y) )
+
+
+—————————
+
+
+Action(PushRight(x, y),
+PRECOND: Caisse(x, y) ^ ¬Caisse(x, y’) ^ Voisin_droite(y, y’) ^ ¬Mur(x, y’) ^ Voisin_gauche(y, y’’) ^ Homme(x, y’’)
+EFFECT : Caisse(x, y’) ^ ¬Caisse(x, y) ^ Homme(x, y) ^ ¬Homme(x, y’’) )
+
+
+Action(PushLeft(x, y),
+PRECOND: Caisse(x, y) ^ voisin_gauche(y, y’) ^ ¬caisse(x, y’) ^ ¬Mur(x, y’) ^ voisin_droite(y, y’’) ^  Homme(x, y’’)
+EFFECT : Caisse(x, y’) ^ ¬Caisse(x, y) ^ Homme(x, y) ^ ¬Homme(x, y) )
+
+
+Action(PushUp(x, y),
+PRECOND: Caisse(x, y) ^ Voisin_haut(x, x’) ^ ¬Caisse(x’, y) ^ ¬Mur(x’, y) ^ Voisin_bas(x, x’’) ^ Homme(x’’, y)
+EFFECT : Caisse(x’, y) ^ ¬Caisse(x, y) ^ Homme(x, y) ^ ¬Homme(x’’, y) )
+
+
+Action(PushDown(x, y),
+PRECOND: Caisse(x, y) ^ Voisin_bas(x, x’) ^ ¬Caisse(x’, y) ^ ¬Mur(x’, y) ^ Voisin_haut(x, x’’) ^ Homme(x’’, y)
+EFFECT : Caisse(x’, y) ^ ¬Caisse(x, y) ^ Homme(x, y) ^ ¬Homme(x’’, y) )
+
+
+—————————
+
+Q1.1 Le plan = liste d’actions ordonnées
+Q1.2 fonction vérifiant si un plan d’action est valide = on regarde si l’état résultant de toutes les actions est un état final et également si chaque état résultant d’une action est utilisable par la suivante
+
+Q2.1 Un état est représenté par la déclaration des positions des mûrs, de l’homme, des caisses, des cibles
+Q2.2 Pour état initial, on définit les positions de départ des mûrs, de l’homme, des caisses, des cibles
+Q2.3 L’état est final si toutes les caisses sont sur les cases cibles (positions des mûrs à l’état courant = positions des cibles de l’état initial)

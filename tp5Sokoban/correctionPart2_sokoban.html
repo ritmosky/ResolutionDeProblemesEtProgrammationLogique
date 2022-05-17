@@ -1,0 +1,669 @@
+<!DOCTYPE html>
+<html lang="fr-FR">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="csrf-token" content="c5t1l8Hr-5LyKf0c2c4XmMl6a-yNvLrtQWaY">
+    
+    
+    <meta name="description" content="# Eléments de réponse pour le TP Sokoban - partie II  *Disclaimer : les choix d&#39;implémentation sont ">
+    
+    <title>Eléments de réponse pour le TP Sokoban - partie II - HackMD</title>
+    <link rel="icon" type="image/png" href="https://hackmd.io/favicon.png">
+	<link rel="apple-touch-icon" href="https://hackmd.io/apple-touch-icon.png">
+    
+<script nonce="1aac1efb-eca4-45e8-8fc0-52687f357725">
+  window.domain = 'hackmd.io'
+  window.urlpath = ''
+  window.debug = false
+  window.version = '1.3.0'
+  window.brand = 'HackMD'
+
+  
+  window.NOTE_ID = 'OZFukBWcQX-3FFPQAj3g_A'
+  
+
+  window.GOOGLE_API_KEY = 'AIzaSyCjSrqWHhmWJnoI7JlD88XDSaBgiKbaenA'
+  window.GOOGLE_CLIENT_ID = '911617723593-drikdibvvn63slfd6kbqigo8ql1no55s.apps.googleusercontent.com'
+  window.DROPBOX_APP_KEY = 'rdoizrlnkuha23r'
+  
+  window.PLANTUML_SERVER = 'https://ptuml.hackmd.io'
+
+  window.ASSET_URL = 'https://assets.hackmd.io'
+
+  window.USER_CAN_CREATE_TEAM = true
+  window.USER_CAN_DELETE_ACCOUNT = true
+  window.USER_DELETE_ACCOUNT_VIA_EMAIL = true
+  window.PAYMENT_ENABLED = true
+  window.PAYMENT_PROMOTION_BANNER_ENABLED = true
+  window.GITHUB_SYNC_ENABLED = true
+  window.GITLAB_SYNC_ENABLED = false
+  window.GITLAB_SYNC_BASE_URL = ''
+  window.VCS_SYNC_MODE = 'github'
+  window.VCS_PROVIDER_NAME = 'GitHub'
+  window.FREE_TEAM_NUM = 20
+  window.FREE_TEAM_MEMBER_NUM = 3
+  window.FREE_PUBLIC_TEAM_NUM = 10
+  
+  window.EE_SITE_ENABLE = false
+  window.EE_SITE_NAME = 'false'
+  window.EE_SITE_LINK = 'false'
+  window.EESITE_INFO = false
+  window.ENTERPRISE_DISCOVERY_ENABLE = false
+  window.ENTERPRISE_DISCOVERY_TEAM = true
+  window.ENTERPRISE_DISCOVERY_NOTE = true
+  window.ENTERPRISE_DISCOVERY_VIEW_PERMISSION = 'guest'
+  
+  window.ALLOW_ANONYMOUS = true
+  window.ALLOW_ANONYMOUS_EDIT = false
+  window.PUBLIC_OVERVIEW = false
+  window.INTERNAL_PUBLIC_OVERVIEW = false
+  window.FULL_TEXT_SEARCH_ENABLE = false
+  window.MARKETING_EMAIL_ENABLE = true
+  
+  window.API_MANAGEMENT_UI_ENABLE = true
+  window.FEEDBACK_UI_ENABLE = true
+
+  
+  window.SHOW_HOT_NOTES = false
+  
+
+  
+  window.HOT_NOTES_TIME_TYPE = 'week'
+  
+
+  
+  window.SHOW_OVERVIEW = false
+  
+
+  
+  window.MENTIONS = {}
+  
+
+  
+  window.MENTION_ANCHORS = []
+  
+
+  
+  window.COMMENT_ANCHORS = []
+  
+
+  
+  window.IS_OWNER = false
+  
+
+  
+  window.IS_TEAM_ADMIN = false
+  
+
+  
+  window.IS_INVITEE_ADMIN = false
+  
+
+  
+  window.USER_PROFILE = {"name":"Guest Rodriquez"}
+  
+
+  
+  window.VERSION_TIME = '1652729213673'
+  
+
+  
+  window.canEdit = false
+  
+
+  
+  window.canWriteComment = true
+  
+</script>
+
+
+    
+<!-- Google Tag Manager -->
+<script nonce="1aac1efb-eca4-45e8-8fc0-52687f357725">(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-KLW9Z3');</script>
+<!-- End Google Tag Manager -->
+
+
+    
+
+
+
+<meta property="fb:app_id" content="1436904003272070">
+
+
+    <meta name="twitter:image:src" content="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiIHN0YW5kYWxvbmU9Im5vIj8+PHN2ZyB4bWxuczpyZGY9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkvMDIvMjItcmRmLXN5bnRheC1ucyMiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgaGVpZ2h0PSI5NiIgd2lkdGg9Ijk2IiB2ZXJzaW9uPSIxLjEiIHZpZXdCb3g9IjAgMCA5NiA5NiI+PGc+PHJlY3Qgd2lkdGg9Ijk2IiBoZWlnaHQ9Ijk2IiBmaWxsPSIjZDVkYjM0IiAvPjx0ZXh0IGZvbnQtc2l6ZT0iNjRweCIgZm9udC1mYW1pbHk9InNhbnMtc2VyaWYiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZpbGw9IiNmZmZmZmYiPjx0c3BhbiB4PSI0OCIgeT0iNzIiIHN0cm9rZS13aWR0aD0iLjI2NDU4cHgiIGZpbGw9IiNmZmZmZmYiPkk8L3RzcGFuPjwvdGV4dD48L2c+PC9zdmc+" />
+
+
+<meta name="twitter:site" content="@hackmdio" />
+<meta name="twitter:card" content="summary" />
+<meta name="twitter:title" content="Eléments de réponse pour le TP Sokoban - partie II - HackMD" />
+
+
+    <meta name="twitter:description" content="# Eléments de réponse pour le TP Sokoban - partie II  *Disclaimer : les choix d&#39;implémentation sont " />
+
+
+
+    <meta property="og:image" content="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiIHN0YW5kYWxvbmU9Im5vIj8+PHN2ZyB4bWxuczpyZGY9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkvMDIvMjItcmRmLXN5bnRheC1ucyMiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgaGVpZ2h0PSI5NiIgd2lkdGg9Ijk2IiB2ZXJzaW9uPSIxLjEiIHZpZXdCb3g9IjAgMCA5NiA5NiI+PGc+PHJlY3Qgd2lkdGg9Ijk2IiBoZWlnaHQ9Ijk2IiBmaWxsPSIjZDVkYjM0IiAvPjx0ZXh0IGZvbnQtc2l6ZT0iNjRweCIgZm9udC1mYW1pbHk9InNhbnMtc2VyaWYiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZpbGw9IiNmZmZmZmYiPjx0c3BhbiB4PSI0OCIgeT0iNzIiIHN0cm9rZS13aWR0aD0iLjI2NDU4cHgiIGZpbGw9IiNmZmZmZmYiPkk8L3RzcGFuPjwvdGV4dD48L2c+PC9zdmc+" />
+
+
+<meta property="og:site_name" content="HackMD" />
+<meta property="og:type" content="article" />
+<meta property="og:title" content="Eléments de réponse pour le TP Sokoban - partie II - HackMD" />
+
+
+    <meta property="og:description" content="# Eléments de réponse pour le TP Sokoban - partie II  *Disclaimer : les choix d&#39;implémentation sont " />
+
+
+    <link rel="stylesheet" href='https://assets.hackmd.io/build/emojify.js/dist/css/basic/emojify.min.css'>
+     <link href="https://assets.hackmd.io/build/font-vendor.f71b2dd20d2cd4c87735.css" rel="stylesheet"><link href="https://assets.hackmd.io/build/common-vendor.1233bc7a27f833ea4984.css" rel="stylesheet"><link href="https://assets.hackmd.io/build/pretty-vendor.125d4ded35ba0a2fa5e9.css" rel="stylesheet"><link href="https://assets.hackmd.io/build/pretty.b62eb7d5398bb27f3332.css" rel="stylesheet">
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+<!--[if lt IE 9]>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.min.js" integrity="sha256-3Jy/GbSLrg0o9y5Z5n1uw0qxZECH7C6OQpVBgNFYa0g=" crossorigin="anonymous"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/respond.js/1.4.2/respond.min.js" integrity="sha256-g6iAfvZp+nDQ2TdTR/VVKJf3bGro4ub5fvWSWVRi2NE=" crossorigin="anonymous"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/es5-shim/4.5.9/es5-shim.min.js" integrity="sha256-8E4Is26QH0bD52WoQpcB+R/tcWQtpzlCojrybUd7Mxo=" crossorigin="anonymous"></script>
+<![endif]-->
+
+</head>
+
+<body style="display:none;">
+    <div class="ui-infobar container-fluid unselectable hidden-print">
+        <div class="row">
+            <div class="col-xs-12 ui-infobar-inner">
+                <div class="ui-infobar__user-info">
+                    <ul class="list-inline">
+                        <li>
+                            
+                                <span class="ui-lastchangeuser" data-profile="InconsistentKB">&thinsp;<a class="ui-user-icon small" style="background-image: url(https://www.gravatar.com/avatar/940923907909a42ea3b5ff33febd762b?s=96);" target="_blank"></a></span>
+                            
+                            &nbsp;<span class="text-uppercase ui-status-lastchange"></span>
+                            <span class="ui-lastchange text-uppercase" data-createtime="Mon May 16 2022 14:01:45 GMT+0000 (Coordinated Universal Time)" data-updatetime="Mon May 16 2022 19:26:53 GMT+0000 (Coordinated Universal Time)"></span>
+                        </li>
+                        
+                        
+                            <li>
+                                <span class="ui-owner-team" data-profile="ia02">
+                                    &thinsp;<a class="ui-user-icon small" style="background-image: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiIHN0YW5kYWxvbmU9Im5vIj8+PHN2ZyB4bWxuczpyZGY9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkvMDIvMjItcmRmLXN5bnRheC1ucyMiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgaGVpZ2h0PSI5NiIgd2lkdGg9Ijk2IiB2ZXJzaW9uPSIxLjEiIHZpZXdCb3g9IjAgMCA5NiA5NiI+PGc+PHJlY3Qgd2lkdGg9Ijk2IiBoZWlnaHQ9Ijk2IiBmaWxsPSIjZDVkYjM0IiAvPjx0ZXh0IGZvbnQtc2l6ZT0iNjRweCIgZm9udC1mYW1pbHk9InNhbnMtc2VyaWYiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZpbGw9IiNmZmZmZmYiPjx0c3BhbiB4PSI0OCIgeT0iNzIiIHN0cm9rZS13aWR0aD0iLjI2NDU4cHgiIGZpbGw9IiNmZmZmZmYiPkk8L3RzcGFuPjwvdGV4dD48L2c+PC9zdmc+);" target="_blank"></a>
+                                    &nbsp;<span class="text-uppercase">owned this note</span>
+                                </span>
+                            </li>
+                        
+                        <li>
+                            <span class="ui-more-info hmd-dn" data-toggle="popover">
+                                &thinsp;<i class="fa fa-info-circle" aria-hidden="true"></i>
+
+                                <div class="more-info-raw hmd-dn">
+                                    <span class="ui-published-note note-status-row hmd-dn">
+                                        <i class="fa fa-globe" aria-hidden="true" style="margin-top: 1px;"></i>
+                                        Published
+                                    </span>
+
+                                    <span class="ui-connectedGithub note-status-row hmd-dn">
+                                        <i class="fa fa-20 ui-connectedGithubIcon fa-github"></i>
+
+                                        <span>Linked with GitHub</span>
+
+                                        <br>
+
+                                        <a class="file-path" target="_blank"></a>
+                                    </span>
+                                </div>
+                            </span>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="hmd-text-right ui-infobar__actions">
+                    <ul class="list-inline">
+                        <li>
+                            
+                                <a class="ui-signin community-button hidden-xs" href="#"><span class="text"><i class="fa fa-fw fa-heart-o"></i>Like<span class="count"></span></span></a>
+                                <a class="ui-signin community-button hidden-xs" href="#"><span class="text"><i class="fa fa-fw fa-bookmark-o"></i>Bookmark</span></a>
+                                <a class="ui-signin community-button hidden-xs" href="#"><span class="text"><i class="fa fa-fw fa-bell-o"></i>Subscribe</span></a>
+                            
+                        </li>
+                        
+                    </ul>
+                </div>
+
+                <div class="clearfix"></div>
+            </div>
+        </div>
+        
+        <div class="ui-comment-app" id="hackmd-app">
+            <div id="comment-app"></div>
+        </div>
+        
+    </div>
+
+    <!-- Markdown rendered container -->
+    <div id="doc" class="container-fluid markdown-body" data-hard-breaks="true"># Eléments de réponse pour le TP Sokoban - partie II
+
+*Disclaimer : les choix d&#39;implémentation sont volontairement naïfs, afin d&#39;illustrer de manière claire la plupart des problèmes liés aux choix de structure de données.*
+
+## En python !
+Les choix faits en Prolog restent pertinents :
+
+### actions, positions, états et carte
+* une action est un couple (verbe, direction), éventuellement associé à un alias d&#39;un caractère via un dictionnaire. On peut définir une classe (mais c&#39;est lourd), ou utiliser `collections.namedtuple`
+```python
+from collections import namedtuple
+
+Action = namedtuple(&#39;action&#39;,(&#39;verb&#39;,&#39;direction&#39;))
+
+actions = {d : Action(&#39;move&#39;,d) for d in &#39;udrl&#39;} | 
+     {d.upper() : Action(&#39;move&#39;,d) for d in &#39;udrl&#39;}
+
+```
+* les positions sont des couples d&#39;entiers
+* un état encode la position du personnage et l&#39;ensemble des positions des caisses. On peut utiliser un dictionnaire (*spoiler : ça va poser des problèmes*) ayant pour clés `&#39;me&#39;` et `&#39;boxes&#39;`. La valeur associée à la clé `&#39;boxes&#39;` pourrait être une liste, mais il est plus judicieux d&#39;utiliser un ensemble (*spoiler : ça va aussi poser des problèmes*) de positions car les caisses sont indiscernables
+```pyton
+s0 = {&#39;me&#39;: (2, 2),
+&#39;boxes&#39;: {(4, 4), (3, 4), (6, 5), (6, 1), (6, 4), (2, 3), (6, 3)}}
+```
+* les caractéristiques non-fluantes au niveau d&#39;une carte, mais qui changent d&#39;une carte à l&#39;autre, peuvent être encodées dans un autre dictionnaire `map_rules` , qui recenserait l&#39;ensembles de positions des cases (ou des murs) ainsi que celui des positions des cibles
+
+```pyton
+map_rules = 
+{&#39;goals&#39;: {(7, 4), (2, 1), (6, 6), (5, 4), (6, 3), (4, 1), (3, 5)}, 
+&#39;walls&#39;: {(4, 0), (4, 3), (3, 1), (4, 6), (5, 7), (8, 0),
+(0, 2), (8, 3), (0, 5), (8, 6), (1, 0), (1, 6), (7, 7), (4, 2),
+(3, 0), (5, 0), (5, 6), (3, 6), (8, 2), (8, 5), (1, 2), (0, 4),
+(7, 0), (6, 7), (3, 2), (5, 2), (8, 4), (8, 1), (8, 7), (1, 1),
+(0, 3), (2, 0), (0, 6), (2, 6), (6, 0)},
+&#39;actions&#39;: actions}
+```
+### fonctions intermédiaires
+* `one_step` joue le rôle du prédicat `positionRelative`. A noter l&#39;utilisation d&#39;un dictionnaire pour implémenter un sélecteur (Rq : il y a depuis la v3.10 un sélecteur natif en python)
+* `free` permet de créer une couche d&#39;abstraction entre la représentation des données (par exemple, la représentation de la carte à l&#39;aide de cases vides ou bien de murs) et leur utilisation.
+```python
+def one_step(position, direction) :
+    i, j = position
+    return {&#39;r&#39; : (i,j+1), &#39;l&#39; : (i,j-1), &#39;u&#39; : (i-1,j), &#39;d&#39; : (i+1,j)}[direction]
+
+def free(position, map_rules) :
+    return not(position in map_rules[&#39;walls&#39;])
+```
+
+* cette version de `free` n&#39;est pas très satisfaisante : devoir préciser la carte dans les arguments est pénible et inélégant. Le patron de conception *fabrique* offre une manière de contourner cette difficulté et d&#39;implémenter la *fonction dépendant d&#39;un paramètre* $free_{map} : \{positions\} \to \{True, False\}$
+
+```python
+def free_factory(map_rules) :
+    def free(position) :
+        return not(position in map_rules[&#39;walls&#39;])
+    return free
+```
+
+### do(action, état)
+On peut implémenter
+ 
+* comme une procédure, modifiant en place l&#39;état state. On peut renvoyer un booléen pour signifier la réussite de l&#39;opération (c.à.d. la satisfaction des préconditions)
+ ```python
+def do_inplace(action, state) :
+    X0 = state[&#39;me&#39;]
+    boxes = state[&#39;boxes&#39;]
+    X1 = one_step(X0, action.direction)
+    if action.verb == &#39;move&#39; :
+        if free(X1) and not (X1 in boxes) :
+            state[&#39;me&#39;] = X1
+        else :
+            return None
+    if action.verb == &#39;push&#39; :
+        X2 = one_step(X1, action.direction)
+        if X1 in boxes and free(X2) and not (X2 in boxes) :
+            state[&#39;me&#39;] = X1
+            state[&#39;boxes&#39;].add(X2)
+            state[&#39;boxes&#39;].remove(X1)
+        else :
+            return None
+    return None
+
+ ``` 
+ Le parcours correspondant:
+ ```python
+state = {k : v for k,v in s0.items()}
+# la ligne qui précède permet de cloner s0
+# pour ne pas l&#39;écraser
+print(0,state)
+for a in &#39;RurrddddlDRuuuuLLLrdRDrddlLdllUUdR&#39; :
+    do_inplace(actions[a],state)
+    print(a,state)
+
+print(state[&#39;boxes&#39;]==map_rules[&#39;goals&#39;])
+```
+
+* comme une fonction retournant un nouvel état, ou None en cas d&#39;échec
+```python
+def do_fn(action, state) :
+    X0 = state[&#39;me&#39;]
+    boxes = state[&#39;boxes&#39;]
+    X1 = one_step(X0, action.direction)
+    if action.verb == &#39;move&#39; :
+        if free(X1) and not (X1 in boxes) :
+            return {&#39;me&#39; : X1, &#39;boxes&#39; : boxes}
+        else :
+            return None
+    if action.verb == &#39;push&#39; :
+        X2 = one_step(X1, action.direction)
+        if X1 in boxes and free(X2) and not (X2 in boxes) :
+            return {&#39;boxes&#39; : {X2} | boxes - {X1} ,
+                    &#39;me&#39; : X1}
+        else :
+            return None
+    return None
+```  
+
+ Le parcours correspondant:
+ ```python
+state = s0
+print(0,state)
+for a in &#39;RurrddddlDRuuuuLLLrdRDrddlLdllUUdR&#39; :
+    state = do_fn(actions[a],state)
+    print(a,state)
+
+print(state[&#39;boxes&#39;]==map_rules[&#39;goals&#39;])
+```
+
+### Représentation hachable des états
+
+Les implémentations proposées ne permettent pas de stocker les états parcourus dans un dictionnaire :
+
+```python=
+state = s0
+print(0,state)
+save = {}
+for a in &#39;RurrddddlDRuuuuLLLrdRDrddlLdllUUdR&#39; :
+    newstate = do_fn(a,state)
+    save[state] = newstate
+    state = newstate
+    print(a,state)
+
+print(state[&#39;boxes&#39;]==rules[&#39;goals&#39;])  
+```
+
+L&#39;exécution du code précédent produit une erreur `TypeError: unhashable type: &#39;dict&#39;`
+En effet, il n&#39;est pas possible d&#39;utiliser une clé *mutable* dans un dictionnaire.
+On peut envisager plusieurs solutions à ce problème :
+1. utiliser la programmation orientée objet pour représenter les états et fournir une méthode `__hash()` aux objets de la classe `Etat`
+2. représenter les états par un type non-mutable ayant une interface similaire : multiplets (`tuple`) pour les listes, ensembles figés (`frozenset`) pour les ensembles... ou multiplets nommés (`collections.namedtuple`) pour les dictionnaires (ou les objets)
+```python
+from collections import namedtuple
+
+State = namedtuple(&#39;state&#39;,(&#39;me&#39;,&#39;boxes&#39;))
+```
+3. utiliser le transtypage à la volée pour utiliser ces types immuables lors du stockage tout en continuant à employer le code précédent
+
+Une implémentation du parcours précédent mettant en oeuvre la stratégie &#34;sale et rapide&#34; n°3 consiste à remplacer la ligne 1 par `state = State(**s0)` (dictionnaire vers namedtuple) et la ligne 5 par `newstate = State(**do_fn(a,state._asdict()))` (aller-retour)
+
+## Algorithmes de recherche
+
+Pour implémenter les algorithmes de recherche non informée, on peut utiliser la fonction `search_with_parent` vue en cours.
+
+```python
+def search_with_parent(s0, goals, succ, 
+                       remove, insert, debug=True) :
+    l = [s0]
+    save = {s0: None}
+    s = s0
+    while l:
+        if debug:
+            print(&#34;l =&#34;, l)
+        s, l = remove(l)
+        for s2,a in succ(s).items():
+            if not s2 in save:
+                save[s2] = (s,a)
+                if goals(s2):
+                    return s2, save
+                insert(s2, l)
+    return None, save
+```
+On utilise l&#39;implémentation donnée en cours, légèrement altérée
+ * pour effectuer une recherche en largeur, les états sont insérés en queue de file et retirés en tête de file
+* la fonction `succ` renvoie un dictionnaire avec pour clé les états suivants, et pour valeurs les actions correspondantes. Elle est fournie par une *fabrique*
+* la reconstruction du chemin `dict2path` est adaptée pour construire une liste de couples (état, action)
+* le but est implémenté à l&#39;aide d&#39;un prédicat (une fonction python à valeurs booléennes)
+* on teste si un état valide le but lors de l&#39;insertion plutôt que lors du retrait
+
+```python
+def insert_tail(s, l):
+    l.append(s)
+    return l
+
+def remove_head(l):
+    return l.pop(0), l
+
+def remove_tail(l):
+    return l.pop(), l
+
+def dict2path(s, d):
+    l = [(s,None)]
+    while not d[s] is None:
+        parent, a = d[s]
+        l.append((parent,a))
+        s = parent
+    l.reverse()
+    return l
+
+def goal_factory(rules) :
+    def goals(state) :
+        return state.boxes == rules[&#39;goals&#39;]
+    return goals
+
+def succ_factory(rules) :
+    def succ(state) :
+        l = [(do_fn(a,state._asdict()),a) for a in actions]
+        return {State(**x) : a for x,a in l if x}
+    return succ
+
+```
+
+Le script suivant effectue la recherche en largeur d&#39;abord. **Il s&#39;exécute en une trentaine de secondes sur un portable haut de gamme**
+```python
+s_end, save = search_with_parent(s0, mygoals, mysucc,
+                         remove_head, insert_tail, debug=False)
+
+plan = &#39;&#39;.join([a for s,a in dict2path(s_end,save) if a])
+```
+
+On trouve un plan de longueur 34, presque identique à celui mis en oeuvre dans le gif, après avoir visité 481 975 états intermédiaires.</div>
+
+    <div class="document-footer container-fluid hmd-pb-2 hidden-print">
+        <hr>
+        <div class="footer hmd-flex hmd-items-center">
+    <div class="footer__published-by hmd-flex-grow-1">
+        <span>Published on</span> <strong><a href="https://hackmd.io/" target="_blank"><i class="fa fa-file-text"></i> <span class="brand">HackMD</span></a></strong>
+    </div>
+    <div class="footer__views" style="margin-right: 18px;">
+        <i class="fa fa-eye"></i> <span class="ui-viewcount">16</span>
+    </div>
+    <div class="footer__views">
+    
+        <a class="ui-signin community-button" href="#"><span><i class="fa fa-fw fa-heart-o"></i><span class="text hidden-xs">Like</span><span class="count"></span></span></a>
+        <a class="ui-signin community-button" href="#"><span><i class="fa fa-fw fa-bookmark-o"></i><span class="text hidden-xs">Bookmark</span></span></a>
+        <a class="ui-signin community-button" href="#"><span><i class="fa fa-fw fa-bell-o"></i><span class="text hidden-xs">Subscribe</span></span></a>
+    
+    </div>
+</div>
+
+    </div>
+
+    <div class="ui-community unselectable hidden-print hidden-xs" style="display: none;">
+        
+            <a class="ui-signin community-button" href="#" title="Like" data-toggle="tooltip" data-placement="right" data-offset="0,5"><span><i class="fa fa-fw fa-heart-o"></i><span class="count hmd-ml-2"></span></span></a>
+            <a class="ui-signin community-button" href="#" title="Bookmark" data-toggle="tooltip" data-placement="right" data-offset="0,5"><span><i class="fa fa-fw fa-bookmark-o"></i></span></a>
+            <a class="ui-signin community-button" href="#" title="Subscribe" data-toggle="tooltip" data-placement="right" data-offset="0,5"><span ><i class="fa fa-fw fa-bell-o"></i></span></a>
+        
+    </div>
+
+    <div class="ui-toc dropup unselectable hidden-print" style="display:none;">
+        <div class="pull-left dropdown">
+            <a id="tocLabel" class="ui-toc-label btn btn-default" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false" title="Table of content">
+                <i class="fa fa-bars"></i>
+            </a>
+            <ul id="ui-toc" class="ui-toc-dropdown dropdown-menu" aria-labelledby="tocLabel">
+            </ul>
+        </div>
+    </div>
+
+    <div id="ui-toc-affix" class="ui-affix-toc ui-toc-dropdown unselectable hidden-print" data-spy="affix" style="display:none;"></div>
+    
+
+    <div class="clearfix"></div>
+
+    <!-- signin modal -->
+<div class="modal fade signin-modal" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close" style="margin-top: 10px; right: 20px; position: absolute;"><span aria-hidden="true">&times;</span></button>
+            
+
+
+
+
+
+
+    
+
+
+
+
+
+
+<h3>Sign in</h3>
+
+<form data-toggle="validator" role="form" class="form-horizontal" method="post" enctype="application/x-www-form-urlencoded">
+    <div class="hmd-dn"><input type="hidden" name="_csrf" value="c5t1l8Hr-5LyKf0c2c4XmMl6a-yNvLrtQWaY"></div>
+    <div class="hmd-dn"><input type="hidden" name="create_team" value="false"></div>
+    <div class="hmd-dn"><input type="hidden" name="create_paid_team" value="false"></div>
+    <div class="form-group  ">
+        <label for="email" class="control-label">Email</label>
+        <label for="inputEmail" class="control-label pull-right errors">
+            
+        </label>
+        <span class="help-block control-label with-errors pull-right" style="display: inline;"></span>
+        <div class="input-block">
+            
+                <input type="email" class="form-control" name="email" placeholder="Your email" required autocomplete="email">
+            
+            <span class="error-sign"></span>
+        </div>
+    </div>
+    <div class="form-group ">
+        <label for="password" class="control-label">Password</label>
+        <label for="inputPassword" class="control-label pull-right errors">
+            
+        </label>
+        <span class="help-block control-label with-errors pull-right" style="display: inline;"></span>
+        <div class="input-block">
+            <input type="password" class="form-control" name="password" placeholder="Your password" required autocomplete="current-password">
+            <span class="error-sign"></span>
+            
+                <span class="control-label pull-right" style="font-size: 13px; margin-top: 5px;"><a href="https://hackmd.io/settings/forgotPassword" style="text-decoration: underline;">Forgot password</a></span>
+            
+        </div>
+    </div>
+
+    <div style="text-align: center; padding-top: 15px; margin-bottom: 0px;">
+        
+            <input type="submit" class="btn btn-success btn-large" formaction="https://hackmd.io/login" value="Sign in">
+        
+
+        
+    </div>
+</form>
+
+
+
+
+
+
+
+
+    
+        <p class="separator">OU</p>
+    
+
+    
+        <p>By clicking below, you agree to our <a href="https://hackmd.io/s/terms" target="_blank">terms of service</a>.</p>
+    
+
+    <div class="social-buttons-container">
+    
+    <a href="https://hackmd.io/auth/facebook" class="btn btn-lg btn-block btn-social btn-facebook">
+        <i class="fa fa-facebook"></i> Se connecter depuis Facebook
+    </a>
+    
+    
+    <a href="https://hackmd.io/auth/twitter" class="btn btn-lg btn-block btn-social btn-twitter">
+        <i class="fa fa-twitter"></i> Se connecter depuis Twitter
+    </a>
+    
+    
+    <a href="https://hackmd.io/auth/github" class="btn btn-lg btn-block btn-social btn-github">
+        <i class="fa fa-github"></i> Se connecter depuis GitHub
+    </a>
+    
+    
+    <a href="https://hackmd.io/auth/dropbox" class="btn btn-lg btn-block btn-social btn-dropbox">
+        <i class="fa fa-dropbox"></i> Se connecter depuis Dropbox
+    </a>
+    
+    
+    <a href="https://hackmd.io/auth/google" class="btn btn-lg btn-block btn-social btn-google">
+        <i class="icon icon-google"></i> Se connecter depuis Google
+    </a>
+    
+    
+    
+</div>
+
+
+
+
+
+    <div >
+        <p>New to HackMD? <a href="https://hackmd.io/join">Sign up</a></p>
+    </div>
+
+
+        </div>
+    </div>
+</div>
+
+    
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-60728495-1"></script>
+<script nonce="1aac1efb-eca4-45e8-8fc0-52687f357725">
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    let userid = (document.cookie.match('(^|; )userid=([^;]*)')||0)[2];
+    gtag('config', 'UA-60728495-1', {'user_id': userid});
+</script>
+<script src="https://browser.sentry-cdn.com/5.15.5/bundle.min.js" crossorigin="anonymous"></script>
+<script nonce="1aac1efb-eca4-45e8-8fc0-52687f357725">Sentry.init({ dsn: 'https://73410f1915d84abc8b2dd1f1aabd1c82@sentry.hackmd.dev/4', environment: 'production', integrations: function (intrus) { return intrus.filter(function (itr) { return itr.name !== 'TryCatch' }) } });</script>
+
+
+    
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-KLW9Z3"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+
+
+
+    <script src="https://hackmd.io/api/i18n.js"></script>
+     <script src="https://assets.hackmd.io/build/font-vendor.b287f22511a3b5df90f2.js" defer="defer"></script><script src="https://assets.hackmd.io/build/common-vendor.a6afaa33b9445d028070.js" defer="defer"></script><script src="https://assets.hackmd.io/build/pretty-vendor.fd16cb88af057a8f19d2.js" defer="defer"></script><script src="https://assets.hackmd.io/build/pretty-common.42870335f965b58e4642.js" defer="defer"></script><script src="https://assets.hackmd.io/build/pretty.716dd8d6ad0c6ab50d9d.js" defer="defer"></script>
+
+    
+
+</body>
+</html>
